@@ -1,10 +1,5 @@
 language: node_js
 sudo: required
-# notifications:
-#   email: false
-#   slack:
-#     rooms:
-#       - secure: juuizlfiQolXbqy4L2nfODB1K8xiSGvUrzsT3XeXIsQqX7yCYVvnRUssKLbqgLM9m85kgXJk1ef0qwjJoliNqGcrALTZLHPTkxWwTnV7tPEVS/4uQPSyy+DDHDwrTzCrF3qhCqyKJ6vB18z22qm3qLgStmNj4p1ZLznsdJR/u7U3spJ+WLL70QSNHCQy/5QjRDDiR3oqWdXjhVcUCeV+v/2CtfqK3dqYtzCL/b7z8lm/YbV6w1Rd8mwzTgLstbzjrvR/gq2IPALzzJTq1S8lXtV7ZtbYz4bjB8RNCRZFJrjBUH4CqD1oUskit4RRe+ilVs8qNQh0Tt3whsOdbJoRXJn2B/NVxppp2WGlODdsuMgfNh5iBocHKN3Qo4mONbstnHFG99Hr7L8GbUugJHEQlrZn1xRyO9ulyVp+hFp8/F088NNyhnd3+lERUPA5/4+HPQh6Ea+PyKq2TR41VoDGcRDBS4VY/6PfLEJzxEBjwRAAemfvtOFTUu2EocuAllPX1vMA4b1j7Wm+Bs7wft6nEcVdftVanfAgx4dNksnaS8zN9II8rdtBci2yXYJ6J+e+REDn/2IrHaUwr0N9BojYc0ePUElDcygW4Kk1oGklHp681j2zhi1Gt7rbuae1C9fD4QHnryx59uVH5NXqDsXI5EbwTJE3zvzRz9SzmyDqV5A=
 node_js:
 - '10'
 install:
@@ -13,24 +8,9 @@ jobs:
   include:
   - stage: Deploy
     script: echo "doing insights stuff"
-  - stage: Deploy
-    script: npm run build-standalone && tar -czvf ui-release.tar.gz dist/
-    provider: releases
-    api_key: "GITHUB OAUTH TOKEN"
-    file: "/ui-release.tar.gz"
+  - stage: Prepare standalone release
+    script: npm run build-standalone && tar -czvf ui-release.tar.gz dist/ && ls
     skip_cleanup: true
-    on:
-      tags: true
-
-
-
-# deploy:
-#   provider: releases
-#   api_key: "GITHUB OAUTH TOKEN"
-#   file: "FILE TO UPLOAD"
-#   skip_cleanup: true
-#   on:
-#     tags: true
 
 env:
   global:
@@ -38,3 +18,11 @@ env:
   - REPO_DIR="ansible-hub-ui-build"
   - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
   - NODE_OPTIONS="--max-old-space-size=4096 --max_old_space_size=4096"
+deploy:
+  provider: releases
+  api_key:
+    secure: J+2wblkei6yJGk8tTJKtKLwLMYi6EkYfxfHxALt5LCpCHu4gtMI1bZPHj5nxCtHeJj6pKjii4tT2PCS7+l0y/ZSCCw4Yz9dv/TLoEAiL+GSX9kTqgSRX3SR2kFkavXdGzbJg4ANlQL4L2RoxMa0LNNB0G1S+Ia9Fy61lkZP5IXIFDlhE3/We+/lN9hBGbPaMfFORYcxt90YfXd7Yrbf/wV6/JnypuUOS9TsFwPERkO0Ks2kpDP1rtNss6vTyqSWIvDHHhlrtEmrvQmkREUwVhj7vX917DH3iQpuW0PYJ0frNH9XYPF4EYmFm+LzAxFdQxVXxqrc24RVtZCOu/XaNfCCQrUug9Q3U88vhE3WnCTYPB6a2UEFZ0OiIZM61wG1InuJJTTQhJqrQv5hKUCYW8DoE/+PtQ6/M7jlvsxNUY6sbVrvjSAk7N3bWuAGztDwdc+vZf5UfWpIShAgJ/c6VVdP5PQG+14GcrTo5iGKJMdBRx9VPAOuT1NdY+nJy+luzqTAzGJbLA9V2hiOiZ/HO5yHcSCx0edGY6fth/yIszwKv897avTnJCC0GL6pI+ArVk+LO1dDjYJZC4+KI49iPoYevweo0jbCnA3SzzVD/JWTqKjxhat9nrD23ieFRJKLUKJzTBCTpwrdnxZGJ6jn27lRJZcLL0jZxWAzSmwYcC6I=
+  file: ui-release.tar.gz
+  on:
+    repo: ansible/ansible-hub-ui
+    branch: feature/standalone-releases
