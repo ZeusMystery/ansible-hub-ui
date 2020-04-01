@@ -14,7 +14,8 @@ jobs:
     skip_cleanup: true
     deploy:
       provider: releases
-      api_key: 830bda028806c90690a441a43a1217d93c094f74
+      api_key:
+        secure: "OvcQu5+hthUpeMOp7Da8jUrbsuUi1L6/aKoV4IakCi10Spozs8+m+6TiWcm1R1sQ8H30uR3zVFmtIaRRSMQc762AwP1rGrYl0IBbkGE5Wck+Tfx6V3csk9hueMRzmIR3HagIgjtSUKPv/hfFfYLPkhXSuYRiCgDfOYRl1Kfs5iRm+Od+cbmNuTfz4VQN6iBhJhK/lVlyUu1AWxPc7PNNFgPqa+t5kBpAkU0Ngf6+7SAv0lRUTqVe7BaTlVVPp7zR3ciPGZ7A7OZMy8a88M2P+bBQD0h+MfQ1v4EQy4u2aCLR3BPcQElaDSNKKBsSKq4wr6PjkySWSW+Xb+kHlRLtPn//Ks5xj9/TPwhNTnDD8Spf/b87qOR6SkStn1zXX7POZ7ETT7jMU73y6rA722RPvhxrD1SNScItXIH0diMOHcqN3GTaGgEbI3kekKYBCbhYYS5RcssKRTi3gfxO5VxvW07q1i+eXT115wDrT5fEbUsoKDz/F2tGT3h7U7rUEcBLJdDxxXFF4ARZSJAvI/QKIHGonwpvryfz3WJIj09nOv+huoiqwBpYDGQDSHFjfUCBT0wvvITtuy9tN7oFYWt1FeTgWEMMyuT3F0ln2XMBh5/fKoC5oUYfIr9/2Tk7JI2TKtYwsj9USk1WWmpZn/k67odQSUvax9uFbinxc46QOys="
       file: ui-release.tar.gz
       on:
         branch: feature/standalone-releases
