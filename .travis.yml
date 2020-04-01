@@ -16,10 +16,11 @@ jobs:
     deploy:
       provider: releases
       file: ui-release.tar.gz
+      skip_cleanup: true
       api_key:
         secure: "RlS9bPvhWHRq3YYsVYSNqu79jnXJ2T3VsCvogJ2XlF5D4oBPTdDOCxIjcERGUMtZKqrnu3NBW3gjL4OnMk3OEux5jCtznsb3imEnmeDfwpWba8hzrNIWlu3zlA5voIy4wU3GhsDNyFNm8TFIxZ4uC0zAYzMBgnpBGKVt2scCitpEbWsZmlyGbkwRD6QHAiMSI6rJuBlUMPR/Grzi2pCojK6TImLu3tIL632Xgvo/lorI0qX0Gr9wvA6qUZSKkN6N1hmavha4RvRa1MvLSQ7gf8Y+7Bsf798sblRvTGdBvMvjmHjJL98Ed5UCQWp6evw4YH3utSYjh+WrlIeTy9AN5qh/jL4xeowhU+DYIQp5By66qmDfENA43W3nHC7miJ9ewSF4HYPwIL2hER72lvJboXfDJsFovSF4pEpTGhcLWm1LoCS+w+KmOUI6Wm1xtA0hAtFEgXPn+FyqPJUyLItLBKLFbGB68kFD5P4Bw9MhD2AM7fQieRwDpkSDCgU96mu91aT/sGOQtsH/F6x3INOsXcl+4Ztjdy1S/1nsm4NsVpNoesVaBx33XCEB914QkCmMSXC7EJ39IVQBXCI91WoERDSQet+Gpa2+iLUV9351S7S3L/ViFKzZjH1fojlBxKbfwujKslQNdjYG4GMjQdIgmydXRfPQMg9VlFzdWcDr1yY="
-      on:
-        tags: true
+      # on:
+      #   tags: true
 env:
   global:
   - REPO="git@github.com:RedHatInsights/ansible-hub-ui-build.git"
