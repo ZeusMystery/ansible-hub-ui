@@ -6,19 +6,18 @@ install:
 - npm ci
 jobs:
   include:
-  - stage: Deploy
+  - stage: Deploy cloud.redhat.com
     script: echo "doing insights stuff"
-  - stage: Prepare standalone release
+  - stage: Standalone release
     script: npm run build-standalone && tar -czvf ui-release.tar.gz dist/ && ls
     skip_cleanup: true
     deploy:
       provider: releases
       api_key:
-        secure: J+2wblkei6yJGk8tTJKtKLwLMYi6EkYfxfHxALt5LCpCHu4gtMI1bZPHj5nxCtHeJj6pKjii4tT2PCS7+l0y/ZSCCw4Yz9dv/TLoEAiL+GSX9kTqgSRX3SR2kFkavXdGzbJg4ANlQL4L2RoxMa0LNNB0G1S+Ia9Fy61lkZP5IXIFDlhE3/We+/lN9hBGbPaMfFORYcxt90YfXd7Yrbf/wV6/JnypuUOS9TsFwPERkO0Ks2kpDP1rtNss6vTyqSWIvDHHhlrtEmrvQmkREUwVhj7vX917DH3iQpuW0PYJ0frNH9XYPF4EYmFm+LzAxFdQxVXxqrc24RVtZCOu/XaNfCCQrUug9Q3U88vhE3WnCTYPB6a2UEFZ0OiIZM61wG1InuJJTTQhJqrQv5hKUCYW8DoE/+PtQ6/M7jlvsxNUY6sbVrvjSAk7N3bWuAGztDwdc+vZf5UfWpIShAgJ/c6VVdP5PQG+14GcrTo5iGKJMdBRx9VPAOuT1NdY+nJy+luzqTAzGJbLA9V2hiOiZ/HO5yHcSCx0edGY6fth/yIszwKv897avTnJCC0GL6pI+ArVk+LO1dDjYJZC4+KI49iPoYevweo0jbCnA3SzzVD/JWTqKjxhat9nrD23ieFRJKLUKJzTBCTpwrdnxZGJ6jn27lRJZcLL0jZxWAzSmwYcC6I=
+        secure: TQ/A651cGGC8pHlTZ3rrVcmHAiqdOmywSQOcE5/kgGdr1MbCVsSevyXptBIdZyDLetMr4IIgT91iu3nkDRyUmrRRmu8GD0K/thFgTHV/DDc9ipBvWj9Mw7oJcV4VJCSWYbE2X4KxXmL8zy7nRbRzHmABfgVMz/JcDSAkVMN2+5izcQI1NLeBykwipFa8F5+0pvHZlA9UWibHGKaOqPQFriHMvp5exb5+YtYTFCNOvWDuiWbNmuBAZP1XY78UXtQ8FC6LL27hJYNLO070Iuw80MY4I2ZbPAOK8GPdmRWwJdTgAbtmXqq7fZ449dA1Zab5SXh8IoH4RQZO5K9xFh6ivs8Xy5ljFiumjb3qZcfebv6a5PezmxCpECjd2oF+QpY7RhD5Z5ow1sX/ZAarDhWtkyu5fLBotptyFiAexNOr717P+1lGZoyYDJTJWwNpGJ5isVqOBLZAFy5BPYpwZOKiz+cUYtcl/VDgi/RpHUcGpcn+Unc4OK4JJhXT7WD3R+74Piciw0ek5RyU36C3n7vrCZO/XznDtftRY0WOOHst9aJx/66AqZbbGQVBoTicy0oZ5v7OGH3TTufUv9023r3h22Dp0eHKWtTCEP3IvhVoCMDUo5D+BIx3ehHnN4sxd4RFS/9cYJaR7xrIaUEwKRcORPVyrAq8XWzCzwssBa4508Y=
       file: ui-release.tar.gz
       on:
         branch: feature/standalone-releases
-
 env:
   global:
   - REPO="git@github.com:RedHatInsights/ansible-hub-ui-build.git"
