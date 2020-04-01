@@ -15,6 +15,7 @@ jobs:
     # skip_cleanup: true
     on:
       tags: true
+      branch: feature/standalone-releases
     before_deploy:
       - tar -czvf ui-release.tar.gz config/
     deploy:
