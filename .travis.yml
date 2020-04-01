@@ -9,7 +9,8 @@ jobs:
   - stage: Deploy cloud.redhat.com
     script: echo "doing insights stuff"
   - stage: Standalone release
-    script: npm run build-standalone && tar -czvf ui-release.tar.gz dist/ && ls
+    script: tar -czvf ui-release.tar.gz config/ && ls
+    # script: npm run build-standalone && tar -czvf ui-release.tar.gz dist/ && ls
     # script: touch ui-release.tar.gz
     skip_cleanup: true
     deploy:
