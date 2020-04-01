@@ -9,12 +9,12 @@ jobs:
   - stage: Deploy cloud.redhat.com
     script: echo "doing insights stuff"
   - stage: Standalone release
-    script: npm run build-standalone && tar -czvf ui-release.tar.gz dist/ && ls
+    # script: npm run build-standalone && tar -czvf ui-release.tar.gz dist/ && ls
+    script: touch ui-release.tar.gz
     skip_cleanup: true
     deploy:
       provider: releases
-      api_key:
-        secure: TQ/A651cGGC8pHlTZ3rrVcmHAiqdOmywSQOcE5/kgGdr1MbCVsSevyXptBIdZyDLetMr4IIgT91iu3nkDRyUmrRRmu8GD0K/thFgTHV/DDc9ipBvWj9Mw7oJcV4VJCSWYbE2X4KxXmL8zy7nRbRzHmABfgVMz/JcDSAkVMN2+5izcQI1NLeBykwipFa8F5+0pvHZlA9UWibHGKaOqPQFriHMvp5exb5+YtYTFCNOvWDuiWbNmuBAZP1XY78UXtQ8FC6LL27hJYNLO070Iuw80MY4I2ZbPAOK8GPdmRWwJdTgAbtmXqq7fZ449dA1Zab5SXh8IoH4RQZO5K9xFh6ivs8Xy5ljFiumjb3qZcfebv6a5PezmxCpECjd2oF+QpY7RhD5Z5ow1sX/ZAarDhWtkyu5fLBotptyFiAexNOr717P+1lGZoyYDJTJWwNpGJ5isVqOBLZAFy5BPYpwZOKiz+cUYtcl/VDgi/RpHUcGpcn+Unc4OK4JJhXT7WD3R+74Piciw0ek5RyU36C3n7vrCZO/XznDtftRY0WOOHst9aJx/66AqZbbGQVBoTicy0oZ5v7OGH3TTufUv9023r3h22Dp0eHKWtTCEP3IvhVoCMDUo5D+BIx3ehHnN4sxd4RFS/9cYJaR7xrIaUEwKRcORPVyrAq8XWzCzwssBa4508Y=
+      api_key: 830bda028806c90690a441a43a1217d93c094f74
       file: ui-release.tar.gz
       on:
         branch: feature/standalone-releases
