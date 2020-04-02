@@ -13,6 +13,7 @@ jobs:
   include:
   - stage: Deploy cloud.redhat.com
     script: npm run deploy && curl -sSL https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh | bash -s
+    if: tag IS blank
   - stage: Standalone release
     if: tag IS NOT blank
     before_deploy:
