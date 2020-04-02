@@ -12,7 +12,8 @@ jobs:
     if: tag IS NOT blank
     before_deploy:
       - npm run build-standalone
-      - tar -czvf automation-hub-ui-dist.tar.gz dist/
+      - mv dist/ automation-hub-ui-dist/
+      - tar -czvf automation-hub-ui-dist.tar.gz automation-hub-ui-dist/
     deploy:
       provider: releases
       file: automation-hub-ui-dist.tar.gz
