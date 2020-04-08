@@ -19,7 +19,7 @@ jobs:
     before_deploy:
       - npm run build-standalone
       - mv dist/ automation-hub-ui-dist/
-      - tar -czvf automation-hub-ui-dist.tar.gz automation-hub-ui-dist/
+      - tar -C automation-hub-ui-dist/ -czvf automation-hub-ui-dist.tar.gz .
     deploy:
       provider: releases
       file: automation-hub-ui-dist.tar.gz
