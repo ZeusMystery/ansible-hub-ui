@@ -81,10 +81,88 @@ class AuthHandler extends React.Component<IProps, IState> {
   }
 }
 
+class RouteBase extends React.Component<RouteComponentProps> {
+  constructor(props) {
+    super(props);
+    console.log(props.match.params['base_path']);
+  }
+
+  componentDidMount() {}
+
+  render() {
+    return <>Route details {this.props.match.params['base_path']}</>;
+  }
+}
+
+class RouteImages extends React.Component<RouteComponentProps> {
+  constructor(props) {
+    super(props);
+    console.log(props.match.params['base_path']);
+  }
+
+  componentDidMount() {}
+
+  render() {
+    return <>Route images {this.props.match.params['base_path']}</>;
+  }
+}
+
+class RouteImagesDetail extends React.Component<RouteComponentProps> {
+  constructor(props) {
+    super(props);
+    console.log(props.match.params['base_path']);
+  }
+
+  componentDidMount() {}
+
+  render() {
+    return (
+      <>
+        Route image detail. base path: {this.props.match.params['base_path']}{' '}
+        ref:
+        {this.props.match.params['ref']}
+      </>
+    );
+  }
+}
+
+class RouteActivity extends React.Component<RouteComponentProps> {
+  constructor(props) {
+    super(props);
+    console.log(props.match.params['base_path']);
+  }
+
+  componentDidMount() {}
+
+  render() {
+    return <>Route activity {this.props.match.params['base_path']}</>;
+  }
+}
+
 export class Routes extends React.Component<any> {
   static contextType = AppContext;
 
   routes = [
+    {
+      comp: RouteImagesDetail,
+      //prettier-ignore
+      path: '/containers/:base_path+/_content/images/:ref/'
+    },
+    {
+      comp: RouteImages,
+      //prettier-ignore
+      path: '/containers/:base_path+/_content/images/'
+    },
+    {
+      comp: RouteActivity,
+      //prettier-ignore
+      path: '/containers/:base_path+/_content/activity/'
+    },
+    {
+      comp: RouteBase,
+      //prettier-ignore
+      path: '/containers/:base_path+/'
+    },
     { comp: ExecutionEnvironmentList, path: Paths.executionEnvironments },
     { comp: GroupList, path: Paths.groupList },
     { comp: GroupDetail, path: Paths.groupDetail },
