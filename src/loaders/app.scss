@@ -14,6 +14,10 @@ li.pf-c-nav__item.nav-select > div > button {
   background-color: black;
   color: #f8f8f8;
 }
+li.pf-c-nav__item.pf-m-current > button.pf-c-nav__link {
+  // FIXME: better indicator for active menu section
+  color: red;
+}
 #page-sidebar > div {
   padding-top: 0px;
 }
