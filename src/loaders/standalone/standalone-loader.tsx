@@ -22,6 +22,7 @@ import {
   PageHeaderTools,
   PageSidebar,
 } from '@patternfly/react-core';
+import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { some } from 'lodash';
 
 import { Routes } from './routes';
@@ -30,7 +31,6 @@ import { ActiveUserAPI, UserType, FeatureFlagsType } from 'src/api';
 import { SmallLogo, StatefulDropdown } from 'src/components';
 import { AboutModalWindow } from 'src/containers';
 import { AppContext } from '../app-context';
-import { QuestionCircleIcon } from '@patternfly/react-icons';
 import Logo from 'src/../static/images/logo_large.svg';
 
 interface IState {
@@ -77,8 +77,7 @@ class App extends React.Component<RouteComponentProps, IState> {
     }
 
     let aboutModal = null;
-    let dropdownItems,
-      dropdownItemsCog = [];
+    let dropdownItems;
     let userName: string;
 
     if (user) {
@@ -108,46 +107,7 @@ class App extends React.Component<RouteComponentProps, IState> {
           Logout
         </DropdownItem>,
       ];
-      dropdownItemsCog = [
-        <DropdownItem
-          key='customer_support'
-          onClick={() =>
-            window.open('https://access.redhat.com/support', '_blank')
-          }
-        >
-          Customer Support
-        </DropdownItem>,
-        <DropdownItem
-          key='training'
-          onClick={() =>
-            window.open(
-              'https://www.ansible.com/resources/webinars-training',
-              '_blank',
-            )
-          }
-        >
-          Training
-        </DropdownItem>,
-        <DropdownItem
-          key='documentation'
-          onClick={() =>
-            window.open(
-              'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
-              '_blank',
-            )
-          }
-        >
-          Documentation
-        </DropdownItem>,
-        <DropdownItem
-          key='about'
-          onClick={() =>
-            this.setState({ aboutModalVisible: true, toggleOpen: false })
-          }
-        >
-          About
-        </DropdownItem>,
-      ];
+
       aboutModal = (
         <AboutModalWindow
           isOpen={this.state.aboutModalVisible}
@@ -188,13 +148,6 @@ class App extends React.Component<RouteComponentProps, IState> {
               </Link>
             ) : (
               <div>
-                <StatefulDropdown
-                  items={dropdownItemsCog}
-                  defaultText={<QuestionCircleIcon />}
-                  toggleType='icon'
-                  ariaLabel={'cog-dropdown'}
-                />
-
                 <StatefulDropdown
                   defaultText={userName}
                   toggleType='dropdown'
@@ -251,10 +204,25 @@ class App extends React.Component<RouteComponentProps, IState> {
               condition: featureFlags.execution_environments,
               url: Paths.executionEnvironments,
             }),
-            menuItem('Documentation', {
-              // TODO
-              condition: false,
-            }),
+            menuSection('Documentation', {}, [
+              menuItem('Customer Support', {
+                url: 'https://access.redhat.com/support',
+                external: true,
+              }),
+              menuItem('Training', {
+                url: 'https://www.ansible.com/resources/webinars-training',
+                external: true,
+              }),
+              menuItem('Documentation', {
+                url:
+                  'https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/',
+                external: true,
+              }),
+              menuItem('About', {
+                onclick: () =>
+                  this.setState({ aboutModalVisible: true, toggleOpen: false }),
+              }),
+            ]),
             menuSection('User Access', {}, [
               menuItem('Users', {
                 condition: user.model_permissions.view_user,
@@ -288,8 +256,22 @@ class App extends React.Component<RouteComponentProps, IState> {
       );
     const MenuItem = ({ item }) =>
       !('condition' in item) || !!item.condition ? (
-        <NavItem isActive={item.active}>
-          <Link to={item.url}>{item.name}</Link>
+        <NavItem
+          isActive={item.active}
+          onClick={() => item.onclick && item.onclick()}
+        >
+          {item.url && item.external ? (
+            <a href={item.url} target='_blank'>
+              {item.name}
+              <ExternalLinkAltIcon
+                style={{ position: 'absolute', right: '32px' }}
+              />
+            </a>
+          ) : item.url ? (
+            <Link to={item.url}>{item.name}</Link>
+          ) : (
+            item.name
+          )}
         </NavItem>
       ) : null;
     const Menu = ({ items }) => (
