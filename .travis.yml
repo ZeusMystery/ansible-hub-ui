@@ -38,10 +38,10 @@ jobs:
       - git config --local user.name "Travis CI"
       - git config --local user.email "builds@travis-ci.com"
       - export TRAVIS_TAG=dev
-      - git tag -f $TRAVIS_TAG
-      - git push -q https://$TAGPERM@github.com/ansible/ansible-hub-ui --tags
-      - npm run build-standalone
-      - tar -C dist/ -czvf automation-hub-ui-dist.tar.gz .
+      # - git tag -f $TRAVIS_TAG
+      # - git push -q https://$TAGPERM@github.com/ansible/ansible-hub-ui --tags
+      # - npm run build-standalone
+      # - tar -C dist/ -czvf automation-hub-ui-dist.tar.gz .
     deploy:
       provider: releases
       file: automation-hub-ui-dist.tar.gz
