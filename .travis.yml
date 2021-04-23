@@ -39,7 +39,7 @@ jobs:
       - git config --local user.email "builds@travis-ci.com"
       - export TRAVIS_TAG=dev
       - git tag -f $TRAVIS_TAG
-      - git push -q https://rh-galaxy-droid:${RH_GALAXY_DROID_GITHUB_TOKEN}@github.com/ansible/ansible-hub-ui --tags
+      - git push -q https://rh-galaxy-droid:$RH_GALAXY_DROID_GITHUB_TOKEN@github.com/ansible/ansible-hub-ui --tags
       - npm run build-standalone
       - tar -C dist/ -czvf automation-hub-ui-dist.tar.gz .
     deploy:
