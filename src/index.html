@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
+
         <meta charset="UTF-8">
         <title><%= htmlWebpackPlugin.options.applicationName %></title>
+        <script>
+            function getInjectedVar(var_in, wp){
+                if (var_in.startsWith("{")) {
+                    return wp;
+                } else {
+                    return var_in;
+                }
+            }
+            var UI_BASE_PATH=getInjectedVar("{BASE_PATH}", "<%= htmlWebpackPlugin.options.uiPath %>");
+            var API_BASE_PATH=getInjectedVar("{API_PATH}", "<%= htmlWebpackPlugin.options.apiPath %>")
+        </script>
     </head>
     <body>
+        <!-- {NAV} -->
         <div id="root"></div>
     </body>
 </html>

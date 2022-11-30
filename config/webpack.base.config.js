@@ -25,8 +25,8 @@ const defaultConfigs = [
   // Global scope means that the variable will be available to the app itself
   // as a constant after it is compiled
   { name: 'API_HOST', default: '', scope: 'global' },
-  { name: 'API_BASE_PATH', default: '', scope: 'global' },
-  { name: 'UI_BASE_PATH', default: '', scope: 'global' },
+  { name: 'WP_API_BASE_PATH', default: '/api/galaxy/', scope: 'global' },
+  { name: 'WP_UI_BASE_PATH', default: '/ui/', scope: 'global' },
   { name: 'DEPLOYMENT_MODE', default: 'standalone', scope: 'global' },
   { name: 'NAMESPACE_TERM', default: 'namespaces', scope: 'global' },
   { name: 'APPLICATION_NAME', default: 'Galaxy NG', scope: 'global' },
@@ -75,6 +75,8 @@ module.exports = (inputConfigs) => {
     // used by src/index.html
     applicationName: customConfigs.APPLICATION_NAME,
     targetEnv: customConfigs.DEPLOYMENT_MODE,
+    uiPath: customConfigs.WP_UI_BASE_PATH,
+    apiPath: customConfigs.WP_API_BASE_PATH,
 
     // standalone needs injecting js and css into dist/index.html
     inject: isStandalone,

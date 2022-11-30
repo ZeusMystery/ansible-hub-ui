@@ -9,6 +9,7 @@ const uiExternalLoginURI = process.env.UI_EXTERNAL_LOGIN_URI || '/login';
 module.exports = webpackBase({
   // The host where the API lives. EX: https://localhost:5001
   API_HOST: '',
+  WEBPACK_PUBLIC_PATH: '/static/galaxy_ng/',
 
   // Path to the API on the API host. EX: /api/automation-hub
   API_BASE_PATH: apiBasePath,
